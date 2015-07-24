@@ -3,11 +3,11 @@ class Robot
   def parse
     begin
       ARGF.readlines.each do |line|
-        line_array = line.split(' ')
+        line_array = line.split(" ")
         method = line_array.first.downcase
         args = line_array[1]
-        if method != 'place' && !self.placed
-          puts 'Robot not placed'
+        if method != "place" && !self.placed
+          puts "Robot not placed"
         else
           self.send(method, *args)
         end
@@ -23,19 +23,19 @@ class Robot
   attr_accessor :placed
   private
   attr_accessor :x_position, :y_position, :facing
-  POLES = ['WEST', 'NORTH', 'EAST', 'SOUTH']
+  POLES = ["WEST", "NORTH", "EAST", "SOUTH"]
   LEFT = -1
   RIGHT = 1
 
   def initialize
     self.x_position = 0
     self.y_position = 0
-    self.facing = 'SOUTH'
+    self.facing = "SOUTH"
     self.placed = false
   end
 
   def place(xyf)
-    x, y, f = xyf.split(',')
+    x, y, f = xyf.split(",")
     @x_position = x.to_i
     @y_position = y.to_i
     @facing = f
@@ -47,7 +47,7 @@ class Robot
   def valid_position?(pos)
     return true if pos <= 5 && pos >= 0
 
-    puts 'Invalid movement'
+    puts "Invalid movement"
     false
   end
 
@@ -75,20 +75,20 @@ class Robot
     x_pos = @x_position
     y_pos = @y_position
     case
-      when @facing == 'EAST'
+      when @facing == "EAST"
         x_pos += 1
         @x_position = x_pos if valid_position?(x_pos)
-      when @facing == 'WEST'
+      when @facing == "WEST"
         x_pos -= 1
         @x_position = x_pos if valid_position?(x_pos)
-      when @facing == 'NORTH'
+      when @facing == "NORTH"
         y_pos += 1
         @y_position = y_pos if valid_position?(y_pos)
-      when @facing == 'SOUTH'
+      when @facing == "SOUTH"
         y_pos -= 1
         @y_position = y_pos if valid_position?(y_pos)
       else
-        puts 'Invalid direction'
+        puts "Invalid direction"
     end
   end
 
